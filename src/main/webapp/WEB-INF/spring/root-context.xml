@@ -18,14 +18,20 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
-		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 
+<<<<<<< HEAD
 		<!-- <property name="url" value="jdbc:mariadb://35.187.150.22:22222/acorn_bigto" />
 		<property name="username" value="CTO"/>
 		<property name="password" value="11111"/> -->
 		<property name="url" value="jdbc:mariadb://35.190.226.198:3306/test" />
 		<property name="username" value="CTO"/>
 		<property name="password" value="11111"/>
+=======
+		<property name="url" value="jdbc:log4jdbc:mariadb://35.190.226.198:3306/test" />
+		<property name="username" value="root"/>
+		<property name="password" value="abc123"/>
+>>>>>>> 036bec28e4b66d3339c01f98ce9d4db4243148cc
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

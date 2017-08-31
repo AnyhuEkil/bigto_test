@@ -4,9 +4,64 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.big.to.repository.SampleDAO">
 	<resultMap type="sample" id="sampleResult" />
+<<<<<<< HEAD
 	<resultMap type="cetizen" id="cetizenResult" />
 		
+=======
+	<resultMap type="samplePhone" id="samplePhoneResult" />
+	<resultMap type="samplePhone" id="phoneLineResult" />
+	<resultMap type="java.lang.String" id="string" />
+	
+	<!-- TEST: cetizen 테이블에서 데이터 조회 -->
+>>>>>>> 036bec28e4b66d3339c01f98ce9d4db4243148cc
 	<select id="sample" resultMap="sampleResult">
-		SELECT model FROM cetizen WHERE ID LIMIT 10;
+		SELECT model FROM cetizen WHERE ID LIMIT 10
 	</select>
+	
+	<!-- TEST: 아이폰6이고 용량이 16GB이고 상태가 '상'이고 변경이 확정기변인 데이터를 날짜별 평균 값으로 조회 -->
+	<select id="samplePhone" resultMap="samplePhoneResult">
+		select 
+			date
+			,round(avg(price),0) as price
+		from 
+			cetizen_cp_part
+		where
+			krname like '아이폰6' 
+			and model like '%16%' 
+			and conditions like '상%' 
+			and changes like '확정기변' 
+		group by
+			date
+	</select>
+	
+	<!-- Line: 특정 모델의 조건에 따른 기간별 평균 가격조회 -->
+	<select id="phoneLine" resultMap="phoneLineResult">
+		select 
+			postdate as date,
+			round(avg(price),0) as price 
+		from
+			iphone4
+		where
+			krname like #{krname}
+		    and gb like #{gb}
+		    and conditions like CONCAT(#{conditions},'%')
+		    and changes like #{changes}
+		group by
+			date
+	</select>
+	
+	<select id="krnameList" resultMap="string">
+		select distinct(krname) from iphone4;
+	</select>
+	<select id="gbList" resultMap="string">
+		select distinct(gb) from iphone4 where krname = #{krname}
+	</select>
+	<select id="conditionsList" resultMap="string">
+		select distinct(conditions) from iphone4 where krname=#{krname} and gb=#{gb}
+	</select>
+	<select id="changesList" resultMap="string">
+		select distinct(changes) from iphone4 where krname=#{krname} and gb=#{gb} and conditions=#{conditions}
+	</select>
+
+	
 </mapper>
