@@ -20,4 +20,5 @@ public class SampleController {
 		mav.setViewName("sample");
 		return mav;
 	}
+	
 }

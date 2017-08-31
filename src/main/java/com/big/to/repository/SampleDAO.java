@@ -8,5 +8,5 @@ import com.big.to.vo.Sample;
 
 @Repository
 public interface SampleDAO {
-	public List<Sample> sample(Sample mem);
+	public List<Sample> sample(Sample sam);
 }
